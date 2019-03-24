@@ -32,25 +32,25 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="edtNome" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <Component id="lblIdade" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField2" min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="edtIdade" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="lblSexo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="cmbSexo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="lblCpf" min="-2" max="-2" attributes="0"/>
+                      <Component id="lblAnoIngresso" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="edtCpf" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="edtAnoIngresso" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Component id="lblSiape" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="edtSiape" min="-2" pref="64" max="-2" attributes="0"/>
+                      <Component id="edtMatricula" min="-2" pref="64" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -64,8 +64,9 @@
               <Component id="btnSalvar" linkSize="1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="btnExcluir" linkSize="1" min="-2" pref="79" max="-2" attributes="0"/>
-              <EmptySpace pref="28" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
+          <Component id="jScrollPaneRelatorio" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -88,15 +89,16 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblIdade" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="edtIdade" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSexo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmbSexo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCpf" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edtCpf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblAnoIngresso" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="edtAnoIngresso" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblSiape" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="edtSiape" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="edtMatricula" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jScrollPaneRelatorio" pref="143" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -116,6 +118,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Novo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEditar">
       <Properties>
@@ -126,6 +131,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salvar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>
@@ -143,8 +151,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="edtNome">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtNomeKeyTyped"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="edtIdade">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtIdadeKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSexo">
       <Properties>
@@ -160,23 +174,47 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="cmbSexoKeyTyped"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblCpf">
+    <Component class="javax.swing.JLabel" name="lblAnoIngresso">
       <Properties>
         <Property name="text" type="java.lang.String" value="Ano de ingresso"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="edtCpf">
+    <Component class="javax.swing.JTextField" name="edtAnoIngresso">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtAnoIngressoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblSiape">
       <Properties>
         <Property name="text" type="java.lang.String" value="Matr&#xed;cula"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="edtSiape">
+    <Component class="javax.swing.JTextField" name="edtMatricula">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="edtMatriculaKeyTyped"/>
+      </Events>
     </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPaneRelatorio">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="txtRelatorio">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
   </SubComponents>
 </Form>

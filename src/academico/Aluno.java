@@ -104,6 +104,27 @@ public class Aluno {
         this.ano_ingresso = ano_ingresso;
     }
     
+    public void imprimirNoTerminal(){
+        
+        System.out.println("***** Relatório do aluno *****");
+        System.out.println("Nome completo: "+ this.getNome());
+        System.out.println("Sexo: "+ this.getSexo());
+        System.out.println("Idade: "+ this.getIdade());
+        System.out.println("Matrícula: "+ this.getMatricula());
+        System.out.println("Ano de ingresso: "+ this.getAno_ingresso());
+        System.out.println("***** Fim do relatório *****");
+    }
     
-    
+    public String imprimirString() {
+        
+        String s;
+        
+        s = "Nome: " + this.getNome() + "\n"
+                + "Sexo: " + this.getSexo() + "\n"
+                + "Idade: " + this.getIdade() + "\n"
+                + "Matrícula: " + this.getMatricula() + "\n"
+                + "Ano de ingresso: " + this.getAno_ingresso();
+        
+        return s;
+    }
 }

@@ -10,7 +10,7 @@ package academico;
  * @author rodrigo
  */
 public class Professor {
-    
+
     private int siape;
     private String nome;
     private char sexo;
@@ -18,13 +18,14 @@ public class Professor {
     private String cpf;
 
     /**
-     * A ideia desse construtor é evitar chamadas nos métodos set após a construção.
-     * 
+     * A ideia desse construtor é evitar chamadas nos métodos set após a
+     * construção.
+     *
      * @param nome
      * @param sexo
      * @param idade
      * @param cpf
-     * @param siape 
+     * @param siape
      */
     public Professor(String nome, char sexo, int idade, String cpf, int siape) {
         this.nome = nome;
@@ -96,4 +97,28 @@ public class Professor {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-}    
+
+    public void imprimirNoTerminal() {
+
+        System.out.println("***** Relatório do professor *****");
+        System.out.println("Nome completo: " + this.getNome());
+        System.out.println("SIAPE: " + this.getSiape());
+        System.out.println("CPF: " + this.getCpf());
+        System.out.println("Sexo: " + this.getSexo());
+        System.out.println("Idade: " + this.getIdade());
+        System.out.println("***** Fim do relatório *****");
+    }
+    
+    public String imprimirString() {
+        
+        String s;
+        
+        s = "Nome: " + this.getNome() + "\n"
+                + "Sexo: " + this.getSexo() + "\n"
+                + "Idade: " + this.getIdade() + "\n"
+                + "SIAPE: " + this.getSiape() + "\n"
+                + "CPF: " + this.getCpf();
+        
+        return s;
+    }
+}

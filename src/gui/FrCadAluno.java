@@ -5,9 +5,12 @@
  */
 package gui;
 
+import academico.Aluno;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author CAMPUSRP\rodrigo.pinto
+ * @author Rodrigo Silva Pinto <rsp.4321@gmail.com>
  */
 public class FrCadAluno extends javax.swing.JFrame {
 
@@ -35,13 +38,15 @@ public class FrCadAluno extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         lblIdade = new javax.swing.JLabel();
         edtNome = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        edtIdade = new javax.swing.JTextField();
         lblSexo = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox<>();
-        lblCpf = new javax.swing.JLabel();
-        edtCpf = new javax.swing.JTextField();
+        lblAnoIngresso = new javax.swing.JLabel();
+        edtAnoIngresso = new javax.swing.JTextField();
         lblSiape = new javax.swing.JLabel();
-        edtSiape = new javax.swing.JTextField();
+        edtMatricula = new javax.swing.JTextField();
+        jScrollPaneRelatorio = new javax.swing.JScrollPane();
+        txtRelatorio = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,10 +56,20 @@ public class FrCadAluno extends javax.swing.JFrame {
         lblTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         btnNovo.setText("Novo");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNovoActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
 
@@ -62,13 +77,46 @@ public class FrCadAluno extends javax.swing.JFrame {
 
         lblIdade.setText("Idade");
 
+        edtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtNomeKeyTyped(evt);
+            }
+        });
+
+        edtIdade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtIdadeKeyTyped(evt);
+            }
+        });
+
         lblSexo.setText("Sexo");
 
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        cmbSexo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                cmbSexoKeyTyped(evt);
+            }
+        });
 
-        lblCpf.setText("Ano de ingresso");
+        lblAnoIngresso.setText("Ano de ingresso");
+
+        edtAnoIngresso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtAnoIngressoKeyTyped(evt);
+            }
+        });
 
         lblSiape.setText("Matrícula");
+
+        edtMatricula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                edtMatriculaKeyTyped(evt);
+            }
+        });
+
+        txtRelatorio.setColumns(20);
+        txtRelatorio.setRows(5);
+        jScrollPaneRelatorio.setViewportView(txtRelatorio);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,24 +130,24 @@ public class FrCadAluno extends javax.swing.JFrame {
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(edtNome))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblIdade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)
                         .addComponent(lblSexo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCpf)
+                        .addComponent(lblAnoIngresso)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(edtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(edtAnoIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addComponent(lblSiape)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(76, 76, 76))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(edtSiape, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(edtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
@@ -110,7 +158,8 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addComponent(btnSalvar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPaneRelatorio)
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnEditar, btnExcluir, btnNovo, btnSalvar});
@@ -133,18 +182,79 @@ public class FrCadAluno extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblIdade)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSexo)
                     .addComponent(cmbSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCpf)
-                    .addComponent(edtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAnoIngresso)
+                    .addComponent(edtAnoIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblSiape)
-                    .addComponent(edtSiape, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(39, Short.MAX_VALUE))
+                    .addComponent(edtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPaneRelatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void resetFields() {
+        
+        edtNome.setText("");
+        edtIdade.setText("");
+        edtAnoIngresso.setText("");
+        edtMatricula.setText("");
+    }
+    
+    // O evento "KeyReleased" foi trocado pelo "KeyTyped" pois foi observado em debug que ele acaba processando o evento no próximo campo desnecessariamente
+    private void edtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtNomeKeyTyped
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+            edtIdade.requestFocus();
+        }
+    }//GEN-LAST:event_edtNomeKeyTyped
+
+    private void edtIdadeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtIdadeKeyTyped
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+            cmbSexo.requestFocus();
+        }
+    }//GEN-LAST:event_edtIdadeKeyTyped
+
+    private void cmbSexoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbSexoKeyTyped
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+            edtAnoIngresso.requestFocus();
+        }
+    }//GEN-LAST:event_cmbSexoKeyTyped
+
+    private void edtAnoIngressoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtAnoIngressoKeyTyped
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+            edtMatricula.requestFocus();
+        }
+    }//GEN-LAST:event_edtAnoIngressoKeyTyped
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        
+        // Creating the "Aluno" object and passing values
+        Aluno a = new Aluno(edtNome.getText(),
+                cmbSexo.getSelectedItem().toString().charAt(0), // the method JComboBox.getSelectedItem() return the text of the option
+                Integer.parseInt(edtIdade.getText()),
+                Integer.parseInt(edtMatricula.getText()),
+                Integer.parseInt(edtAnoIngresso.getText()));
+        
+        a.imprimirNoTerminal();
+//        JOptionPane.showMessageDialog(this, a.imprimirString());    // The method JOptionPane.showMessageDialog() shows a window with a message
+        JOptionPane.showMessageDialog(this, "Cadastro feito com sucesso!");
+        
+        txtRelatorio.setText(a.imprimirString());
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void edtMatriculaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_edtMatriculaKeyTyped
+        if (evt.getKeyChar() == java.awt.event.KeyEvent.VK_ENTER) {
+            btnSalvar.requestFocus();   // Colocando o foco no botão de salvar para agilizar o cadastro via teclado
+        }
+    }//GEN-LAST:event_edtMatriculaKeyTyped
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        this.resetFields();
+        edtNome.requestFocus(); // O campo "edtNome" é o primeiro do formulário
+    }//GEN-LAST:event_btnNovoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -153,15 +263,17 @@ public class FrCadAluno extends javax.swing.JFrame {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cmbSexo;
-    private javax.swing.JTextField edtCpf;
+    private javax.swing.JTextField edtAnoIngresso;
+    private javax.swing.JTextField edtIdade;
+    private javax.swing.JTextField edtMatricula;
     private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtSiape;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JLabel lblCpf;
+    private javax.swing.JScrollPane jScrollPaneRelatorio;
+    private javax.swing.JLabel lblAnoIngresso;
     private javax.swing.JLabel lblIdade;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblSexo;
     private javax.swing.JLabel lblSiape;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextArea txtRelatorio;
     // End of variables declaration//GEN-END:variables
 }
