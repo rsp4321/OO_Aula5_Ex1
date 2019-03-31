@@ -235,8 +235,8 @@ public class FrCadAluno extends javax.swing.JFrame {
         Aluno a = new Aluno(edtNome.getText(),
                 cmbSexo.getSelectedItem().toString().charAt(0), // the method JComboBox.getSelectedItem() return the text of the option
                 Integer.parseInt(edtIdade.getText()),
-                Integer.parseInt(edtMatricula.getText()),
-                Integer.parseInt(edtAnoIngresso.getText()));
+                Integer.parseInt(edtMatricula.getText()));
+//                Integer.parseInt(edtAnoIngresso.getText()));
         
         a.imprimirNoTerminal();
 //        JOptionPane.showMessageDialog(this, a.imprimirString());    // The method JOptionPane.showMessageDialog() shows a window with a message

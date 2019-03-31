@@ -15,7 +15,7 @@ public class Aluno {
     private char sexo;
     private int idade;
     private int matricula;
-    private int ano_ingresso;
+//    private int ano_ingresso;
 
     /**
      * A ideia desse construtor é evitar chamadas nos métodos set após a construção.
@@ -24,14 +24,13 @@ public class Aluno {
      * @param sexo
      * @param idade
      * @param matricula
-     * @param ano_ingresso 
      */
-    public Aluno(String nome, char sexo, int idade, int matricula, int ano_ingresso) {
+    public Aluno(String nome, char sexo, int idade, int matricula /*, int ano_ingresso */) {
         this.nome = nome;
         this.sexo = sexo;
         this.idade = idade;
         this.matricula = matricula;
-        this.ano_ingresso = ano_ingresso;
+//        this.ano_ingresso = ano_ingresso;
     }
 
     /**
@@ -90,19 +89,17 @@ public class Aluno {
         this.matricula = matricula;
     }
 
-    /**
-     * @return the ano_ingresso
-     */
+    /*
     public int getAno_ingresso() {
         return ano_ingresso;
     }
+    */
 
-    /**
-     * @param ano_ingresso the ano_ingresso to set
-     */
+    /*
     public void setAno_ingresso(int ano_ingresso) {
         this.ano_ingresso = ano_ingresso;
     }
+    */
     
     public void imprimirNoTerminal(){
         
@@ -111,7 +108,7 @@ public class Aluno {
         System.out.println("Sexo: "+ this.getSexo());
         System.out.println("Idade: "+ this.getIdade());
         System.out.println("Matrícula: "+ this.getMatricula());
-        System.out.println("Ano de ingresso: "+ this.getAno_ingresso());
+//        System.out.println("Ano de ingresso: "+ this.getAno_ingresso());
         System.out.println("***** Fim do relatório *****");
     }
     
@@ -122,8 +119,8 @@ public class Aluno {
         s = "Nome: " + this.getNome() + "\n"
                 + "Sexo: " + this.getSexo() + "\n"
                 + "Idade: " + this.getIdade() + "\n"
-                + "Matrícula: " + this.getMatricula() + "\n"
-                + "Ano de ingresso: " + this.getAno_ingresso();
+                + "Matrícula: " + this.getMatricula() + "\n";
+//                + "Ano de ingresso: " + this.getAno_ingresso();
         
         return s;
     }
