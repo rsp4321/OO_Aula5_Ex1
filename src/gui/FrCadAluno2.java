@@ -5,7 +5,9 @@ package gui;
 import academico.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -21,6 +23,15 @@ public class FrCadAluno2 extends javax.swing.JFrame {
     private int newEdit; //0: Novo , 1: Editar
     private int indexEdit;
     private final String NOME_ARQUIVO = "registro.txt";
+
+    // Como a equipe está desenvolvendo tanto no Windows quanto no linux,
+    // vou utilizar a classe java.nio.file.Path para abstrair os diretórios
+    // sem precisar utlizar métodos de detecção do sistema operacional por enquanto
+    final Path caminho_arquivo = Paths.get( // O objeto "Paths" constrói o objeto "Path" conforme as "partes" do diretório dadas
+            System.getProperty("user.home"), // a rotina System.getProperty() retorna algumas variáveis de ambiente definidas pela JVM no momento da execução. A veriável "user.home" retorna o diretório do usuário no sistema operacional
+            "OO_Aula5", // Essa "parte" indica que se trata da pasta "OO_Aula5"
+            //                "registro.txt");                    // Essa "parte" indica o arquivo
+            NOME_ARQUIVO);
 
     public FrCadAluno2() {
         initComponents();
@@ -142,6 +153,23 @@ public class FrCadAluno2 extends javax.swing.JFrame {
         return a;
     }
 
+    private String imprimirListaCSV() {
+
+        int i;
+        String csv = "";
+
+        for (i = 0; i < lista.size(); i++) {    // loop para percorrer os registros
+
+            csv += lista.get(i).getMatricula() + ";";   // campo "matrícula"
+            csv += lista.get(i).getNome() + ";";        // campo "nome"
+            csv += lista.get(i).getIdade() + ";";       // campo "idade"
+//            csv += lista.get(i).getSexo() + ";\n";      // campo "sexo"
+            csv += lista.get(i).getSexo() + ";";        // Para corrigir um incidente envolvendo o método de leitura, onde se lê o caracter "\n"
+        }
+
+        return csv;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -256,6 +284,11 @@ public class FrCadAluno2 extends javax.swing.JFrame {
         });
 
         btnSalvarArquivo.setText("Salvar no arquivo");
+        btnSalvarArquivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarArquivoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,15 +446,6 @@ public class FrCadAluno2 extends javax.swing.JFrame {
 
     private void btnAbrirArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirArquivoActionPerformed
 
-        // Como a equipe está desenvolvendo tanto no Windows quanto no linux,
-        // vou utilizar a classe java.nio.file.Path para abstrair os diretórios
-        // sem precisar utlizar métodos de detecção do sistema operacional por enquanto
-        Path caminho_arquivo = Paths.get( // O objeto "Paths" constrói o objeto "Path" conforme as "partes" do diretório dadas
-                System.getProperty("user.home"), // a rotina System.getProperty() retorna algumas variáveis de ambiente definidas pela JVM no momento da execução. A veriável "user.home" retorna o diretório do usuário no sistema operacional
-                "OO_Aula5", // Essa "parte" indica que se trata da pasta "OO_Aula5"
-//                "registro.txt");                    // Essa "parte" indica o arquivo
-                NOME_ARQUIVO);
-
         FileReader file_reader_arquivo = null;
         Scanner sc_arquivo = null;
 
@@ -438,7 +462,7 @@ public class FrCadAluno2 extends javax.swing.JFrame {
             // Como o formato de arquivo escolhido é o CSV, vamos alterar o delimitador para o caractere ";"
             sc_arquivo.useDelimiter(";");
 
-            // Por questão de ambiguidade da IDE e do compilador, fiz a inicialização manual das variáveis
+            // Por questão de ambiguidade do verificador de sintaxe da IDE e do compilador, fiz a inicialização manual das variáveis
             int matricula = 0, idade = -1;
             String nome = "";
             char sexo = 'M';
@@ -487,10 +511,10 @@ public class FrCadAluno2 extends javax.swing.JFrame {
                         lstAluno.add(a);
                         break;
                 }
-                
+
                 i++;    // Incrementando o contador para poder fazer a divisão
             }
-            
+
             file_reader_arquivo.close();
 
             // Código gerado automaticamente pelo NetBeans
@@ -516,11 +540,48 @@ public class FrCadAluno2 extends javax.swing.JFrame {
             }
              */
         }
-        
+
         this.lista = lstAluno;
-        
-        JOptionPane.showMessageDialog(this, "Arquivo '"+ caminho_arquivo.toString() +"' carregado com sucesso!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        edtResultado.setText(this.imprimirListaCompleta());
+
+        JOptionPane.showMessageDialog(this, "Arquivo '" + caminho_arquivo.toString() + "' carregado com sucesso!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnAbrirArquivoActionPerformed
+
+    private void btnSalvarArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarArquivoActionPerformed
+
+        // Vamos utilizar a classe java.file.FileWriter para salvar no arquivo
+        FileWriter file_writer_arquivo = null;
+
+        // A classe java.file.PrintWriter fará a escrita no arquivo de fato
+        PrintWriter print_writer_arquivo = null;
+
+        try {
+            file_writer_arquivo = new FileWriter(caminho_arquivo.toString());   // Instanciando com o caminho definido no início da classe
+
+            print_writer_arquivo = new PrintWriter(file_writer_arquivo);
+
+            // Gerando a lista em formato CSV e colocando para imprimir no arquivo usando o método PrintWriter.print() 
+            print_writer_arquivo.print(this.imprimirListaCSV());
+
+            file_writer_arquivo.close();
+
+            JOptionPane.showMessageDialog(this,
+                    "Lista de alunos salva no arquivo '" + caminho_arquivo.toString() + "' com sucesso!",
+                    "Aviso",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (IOException ex) {
+            Logger.getLogger(FrCadAluno2.class.getName()).log(Level.SEVERE, null, ex);
+
+            // Còdigo para finalizar o recurso "print_writer_arquivo"
+        } finally {
+
+            if (print_writer_arquivo != null) {
+                print_writer_arquivo.close();
+            }
+        }
+
+    }//GEN-LAST:event_btnSalvarArquivoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAbrirArquivo;
