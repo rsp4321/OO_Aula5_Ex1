@@ -86,9 +86,9 @@
                   <Component id="btnNovo" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnAbrirArquivo" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnSalvarArquivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSalvarArquivo" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">

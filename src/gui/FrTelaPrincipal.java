@@ -93,7 +93,9 @@ public class FrTelaPrincipal extends javax.swing.JFrame {
 
     private void btnCadastrarProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarProfessorActionPerformed
 
-        FrCadProfessor fr_cad_professor = new FrCadProfessor();
+//        FrCadProfessor fr_cad_professor = new FrCadProfessor();
+        FrCadProfessor2 fr_cad_professor = new FrCadProfessor2();
+
         fr_cad_professor.setVisible(true);
     }//GEN-LAST:event_btnCadastrarProfessorActionPerformed
 

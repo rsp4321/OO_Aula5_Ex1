@@ -46,7 +46,7 @@ public class FrCadAluno2 extends javax.swing.JFrame {
         for (int i = 0; i <= lista.size() - 1; i++) {
             Aluno aux = lista.get(i);
             aux.imprimirString();
-            listaCompleta = listaCompleta + aux.imprimirString();
+            listaCompleta = listaCompleta + aux.imprimirString() + "\n\n";
         }
         return listaCompleta;
     }
@@ -346,7 +346,7 @@ public class FrCadAluno2 extends javax.swing.JFrame {
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAbrirArquivo)
                     .addComponent(btnSalvarArquivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
